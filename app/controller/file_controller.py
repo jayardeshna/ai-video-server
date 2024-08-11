@@ -10,7 +10,7 @@ from gtts import gTTS
 
 upload_bp = Blueprint('upload', __name__)
 nlp = spacy.load('en_core_web_sm')
-openai.api_key = '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'
+
 
 
 @upload_bp.route('/api/v1/upload', methods=['POST'])
