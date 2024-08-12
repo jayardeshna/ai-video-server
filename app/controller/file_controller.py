@@ -1,5 +1,7 @@
 import os
 import re
+
+import pythoncom
 from pptx import Presentation
 import openai
 import spacy
@@ -7,10 +9,10 @@ from flask import Blueprint, request, jsonify, current_app
 from pptx.util import Inches
 from pydub import AudioSegment
 from gtts import gTTS
-
+from win32com import client
 upload_bp = Blueprint('upload', __name__)
 nlp = spacy.load('en_core_web_sm')
-
+openai.api_key = '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'
 
 
 @upload_bp.route('/api/v1/upload', methods=['POST'])
@@ -48,25 +50,35 @@ def generate_video():
     try:
         data = request.get_json()
         slides = data.get('slides', [])
-        translated_slides_data = []
-        for i, slide in enumerate(slides):
-            audio_files = []
-            slide_audio_files = []
-            texts = slide.get('texts')
-            audio_file = f"slide_{i + 1}.mp3"
-            audio_path = os.path.join(current_app.config['UPLOAD_FOLDER'], audio_file)
-            text_to_speech(texts, lang='gu', output_file=audio_path)
-            slide_audio_files.append(audio_file)
-            audio_files.append(audio_file)
-            translated_slides_data.append({
-                'slide_number': slide['slide_number'],
-                'texts': texts,
-                'audio_files': slide_audio_files
-            })
-        return jsonify({'data': translated_slides_data}), 200
-
+        ppt_path = os.path.join(current_app.config['UPLOAD_FOLDER'], "Automation of Powerpoint to Video Conversion.pptx")
+        image_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], 'slides_images')
+        save_presentation_as_images(ppt_path, image_folder)
+        return jsonify({'message': 'Presentation updated successfully', 'ppt_with_audio': "new_ppt_path"}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
+
+def save_presentation_as_images(ppt_path, output_folder):
+    # Initialize COM library
+    pythoncom.CoInitialize()
+    pptx_path = os.path.abspath('uploads/Automation of Powerpoint to Video Conversion.pptx')
+    output_dir = os.path.abspath('files/output')
+    os.makedirs(output_dir, exist_ok=True)
+    powerpoint = client.Dispatch("PowerPoint.Application")
+    powerpoint.Visible = 1
+    try:
+        presentation = powerpoint.Presentations.Open(pptx_path)
+    except Exception as e:
+        raise RuntimeError(f"Failed to open PowerPoint presentation: {e}")
+    print("2")
+    for i, slide in enumerate(presentation.Slides):
+        image_path = os.path.join(output_dir, f"slide_{i + 1}.jpg")
+        print("image_path", image_path)
+        slide.Export(image_path, "JPG", 1280, 720)
+    presentation.Close()
+    powerpoint.Quit()
+    print(f'All slides have been saved as images in {output_folder}')
+    return output_folder
 
 
 def clean_text(text):
