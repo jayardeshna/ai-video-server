@@ -10,6 +10,7 @@ from pptx.util import Inches
 from pydub import AudioSegment
 from gtts import gTTS
 from win32com import client
+from moviepy.editor import ImageClip, AudioFileClip, VideoFileClip, concatenate_videoclips
 upload_bp = Blueprint('upload', __name__)
 nlp = spacy.load('en_core_web_sm')
 openai.api_key = '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'
@@ -52,17 +53,53 @@ def generate_video():
         slides = data.get('slides', [])
         ppt_path = os.path.join(current_app.config['UPLOAD_FOLDER'], "Automation of Powerpoint to Video Conversion.pptx")
         image_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], 'slides_images')
-        save_presentation_as_images(ppt_path, image_folder)
-        return jsonify({'message': 'Presentation updated successfully', 'ppt_with_audio': "new_ppt_path"}), 200
+        slide_images = save_presentation_as_images(ppt_path)
+        video_files = []
+        for i, slide in enumerate(slides):
+
+            slide_audio_files = []
+            audio_files = []
+
+            # Generate one audio file for the combined text
+            audio_file = f"slide_{i + 1}.mp3"
+            audio_path = os.path.join(current_app.config['UPLOAD_FOLDER'], audio_file)
+
+            text_to_speech(slide.get('texts'), lang='gu', output_file=audio_path)
+            slide_audio_files.append(audio_file)
+            audio_files.append(audio_file)
+
+            # Create video for each slide
+            video_file = f"slide_{i + 1}.mp4"
+            video_path = os.path.join(current_app.config['UPLOAD_FOLDER'], video_file)
+            create_slide_video(slide_images[i], os.path.join(current_app.config['UPLOAD_FOLDER'], slide_audio_files[0]),
+                               video_path)
+            video_files.append(video_path)
+
+        print(video_files, "video files")
+        # Merge all slide videos into a single video
+        clips = [VideoFileClip(video) for video in video_files]
+        print(clips, "clips")
+        final_clip = concatenate_videoclips(clips)
+        final_video_path = os.path.join(current_app.config['UPLOAD_FOLDER'], "final_presentation.mp4")
+        final_clip.write_videofile(final_video_path, codec="libx264", audio_codec="aac")
+
+        return jsonify({'message': 'Presentation updated successfully', 'final_video': final_video_path}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
 
-def save_presentation_as_images(ppt_path, output_folder):
+def create_slide_video(image_path, audio_path, output_path):
+    image_clip = ImageClip(image_path).set_duration(AudioFileClip(audio_path).duration)
+    audio_clip = AudioFileClip(audio_path)
+    video = image_clip.set_audio(audio_clip)
+    video.write_videofile(output_path, fps=24)
+
+def save_presentation_as_images(ppt_path):
     # Initialize COM library
     pythoncom.CoInitialize()
     pptx_path = os.path.abspath('uploads/Automation of Powerpoint to Video Conversion.pptx')
     output_dir = os.path.abspath('files/output')
+    slide_images = []
     os.makedirs(output_dir, exist_ok=True)
     powerpoint = client.Dispatch("PowerPoint.Application")
     powerpoint.Visible = 1
@@ -73,12 +110,12 @@ def save_presentation_as_images(ppt_path, output_folder):
     print("2")
     for i, slide in enumerate(presentation.Slides):
         image_path = os.path.join(output_dir, f"slide_{i + 1}.jpg")
-        print("image_path", image_path)
+        slide_images.append(image_path)
         slide.Export(image_path, "JPG", 1280, 720)
     presentation.Close()
     powerpoint.Quit()
-    print(f'All slides have been saved as images in {output_folder}')
-    return output_folder
+    print(f'All slides have been saved as images in {output_dir}')
+    return slide_images
 
 
 def clean_text(text):
