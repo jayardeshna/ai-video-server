@@ -12,8 +12,8 @@ from gtts import gTTS
 from win32com import client
 from moviepy.editor import ImageClip, AudioFileClip, VideoFileClip, concatenate_videoclips
 upload_bp = Blueprint('upload', __name__)
-nlp = spacy.load('en_core_web_sm')
-openai.api_key = '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'
+# nlp = spacy.load('en_core_web_sm')
+openai.api_key = 'sk-wWX9kmGHtOsPNsql1WJEsfhHQpvNwuY40FsC70AnACT3BlbkFJVQceVId49HsHfcMwKmCEzUrxc048HGFzw2HVjuBYAA'
 
 
 @upload_bp.route('/api/v1/upload', methods=['POST'])
@@ -25,6 +25,12 @@ def upload_ppt():
 
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
+
+    upload_folder = current_app.config['UPLOAD_FOLDER']
+
+    # Check if the directory exists, and create it if it doesn't
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
 
     if file and file.filename.endswith('.pptx'):
         filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
@@ -104,7 +110,7 @@ def save_presentation_as_images(ppt_path):
     powerpoint = client.Dispatch("PowerPoint.Application")
     powerpoint.Visible = 1
     try:
-        presentation = powerpoint.Presentations.Open(pptx_path)
+        presentation = powerpoint.Presentations.Open('uploads/auto.pptx')
     except Exception as e:
         raise RuntimeError(f"Failed to open PowerPoint presentation: {e}")
     print("2")
@@ -118,29 +124,27 @@ def save_presentation_as_images(ppt_path):
     return slide_images
 
 
-def clean_text(text):
-    tags_to_exclude = re.compile(r'/p|/b|/i|/u')  # Add more tags if needed
-
-    text = tags_to_exclude.sub('', text)
-
-    text = re.sub(r'\t+', ' ', text)
-    text = re.sub(r'\n+', ' ', text).strip()
-    text = re.sub(r'\s+', ' ', text)
-
-    doc = nlp(text)
-    cleaned_text = ' '.join(token.text for token in doc)
-
-    return cleaned_text
+# def clean_text(text):
+#     tags_to_exclude = re.compile(r'/p|/b|/i|/u')  # Add more tags if needed
+#
+#     text = tags_to_exclude.sub('', text)
+#
+#     text = re.sub(r'\t+', ' ', text)
+#     text = re.sub(r'\n+', ' ', text).strip()
+#     text = re.sub(r'\s+', ' ', text)
+#
+#     doc = nlp(text)
+#     cleaned_text = ' '.join(token.text for token in doc)
+#
+#     return cleaned_text
 
 def translate_text(text, target_language):
     prompt = f"Translate the following text into {target_language}:\n\n{text}"
-
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[{"role": "system", "content": "You are a helpful assistant."},
                   {"role": "user", "content": prompt}]
     )
-
     translated_text = response.choices[0].message['content']
     return translated_text
 
@@ -157,8 +161,8 @@ def extract_text_from_ppt(filepath):
 
         for shape in slide.shapes:
             if hasattr(shape, "text"):
-                cleaned_text = clean_text(shape.text)
-                slide_content['texts'].append(cleaned_text)
+                # cleaned_text = clean_text(shape.text)
+                slide_content['texts'].append(shape.text)
 
         slides_data.append(slide_content)
 
