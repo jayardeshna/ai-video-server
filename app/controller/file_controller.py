@@ -3,15 +3,18 @@ import re
 import shutil
 import pythoncom
 from win32com.client import Dispatch
+import comtypes
 from pptx import Presentation
 import openai
 from flask import Blueprint, request, jsonify, current_app
+from pptx.util import Inches
+from pydub import AudioSegment
 from gtts import gTTS
 from comtypes.client import CreateObject
 from moviepy.editor import ImageClip, AudioFileClip, VideoFileClip, concatenate_videoclips
 upload_bp = Blueprint('upload', __name__)
 # nlp = spacy.load('en_core_web_sm')
-
+openai.api_key = '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'
 
 
 @upload_bp.route('/api/v1/upload', methods=['POST'])
@@ -33,19 +36,21 @@ def upload_ppt():
     if file and file.filename.endswith('.pptx'):
         filepath = os.path.join(current_app.config['PPT_FOLDER'], file.filename)
         file.save(filepath)
-        slides_data = extract_text_from_ppt(filepath)
+        translated_filepath = os.path.join(current_app.config['PPT_FOLDER'], 'Translated_' + file.filename)
         target_language = request.args.get('language', 'Gujarati')
+        translate_ppt(filepath, translated_filepath, target_language)
+        slides_data = extract_text_from_ppt(translated_filepath)
+
         translated_slides_data = []
-        for i, slide in enumerate(slides_data):
-            translated_texts = [translate_text(text, target_language) for text in slide['texts']]
-            combined_text = " ".join(translated_texts)
+        for slide in slides_data:
+            combined_text = " ".join(slide['texts'])
             translated_slides_data.append({
                 'slide_number': slide['slide_number'],
                 'texts': combined_text,
             })
         return jsonify({
             'message': 'File uploaded and text extracted successfully',
-            'filename': file.filename,
+            'filename': 'Translated_' + file.filename,
             'slides': translated_slides_data
         }), 200
     return jsonify({'error': 'Invalid file type'}), 400
@@ -90,15 +95,44 @@ def generate_video():
         shutil.rmtree(current_app.config['IMAGE_FOLDER'], ignore_errors=True)
         shutil.rmtree(current_app.config['PPT_FOLDER'], ignore_errors=True)
         shutil.rmtree(current_app.config['VIDEO_PATH'], ignore_errors=True)
-        return jsonify({'message': 'Presentation updated successfully', 'final_video': final_video_path}), 200
+        return jsonify({'message': 'Presentation updated successfully', 'final_video': os.path.abspath(final_video_path)}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
+def translate_ppt(input_ppt_path, output_ppt_path, target_language="Hindi"):
+    # Load the original presentation
+    prs = Presentation(input_ppt_path)
+
+    # Iterate through slides and shapes to translate the text while maintaining the format
+    for slide in prs.slides:
+        for shape in slide.shapes:
+            if shape.has_text_frame:
+                for paragraph in shape.text_frame.paragraphs:
+                    original_text = paragraph.text
+                    if original_text.strip():
+                        translated_text = translate_text(original_text, target_language)
+
+                        # Replace the text with the translation
+                        original_font = paragraph.font
+                        paragraph.text = translated_text
+
+                        # Restore the original font settings
+                        paragraph.font.name = original_font.name
+                        paragraph.font.size = original_font.size
+                        paragraph.font.bold = original_font.bold
+                        paragraph.font.italic = original_font.italic
+
+    # Save the translated presentation
+    prs.save(output_ppt_path)
+    print(f"Translated PowerPoint saved as {output_ppt_path}")
 
 
 def create_slide_video(image_path, audio_path, output_path):
     image_clip = ImageClip(image_path).set_duration(AudioFileClip(audio_path).duration)
     audio_clip = AudioFileClip(audio_path)
+
     video = image_clip.set_audio(audio_clip)
+
     video.write_videofile(output_path, fps=24)
 
 def save_presentation_as_images(ppt_path, output_folder):
@@ -126,21 +160,6 @@ def save_presentation_as_images(ppt_path, output_folder):
     pythoncom.CoUninitialize()
     return slide_images
 
-
-
-# def clean_text(text):
-#     tags_to_exclude = re.compile(r'/p|/b|/i|/u')  # Add more tags if needed
-#
-#     text = tags_to_exclude.sub('', text)
-#
-#     text = re.sub(r'\t+', ' ', text)
-#     text = re.sub(r'\n+', ' ', text).strip()
-#     text = re.sub(r'\s+', ' ', text)
-#
-#     doc = nlp(text)
-#     cleaned_text = ' '.join(token.text for token in doc)
-#
-#     return cleaned_text
 
 def translate_text(text, target_language):
     prompt = f"Translate the following text into {target_language}:\n\n{text}"
