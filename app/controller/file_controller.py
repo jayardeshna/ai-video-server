@@ -14,7 +14,7 @@ from comtypes.client import CreateObject
 from moviepy.editor import ImageClip, AudioFileClip, VideoFileClip, concatenate_videoclips
 upload_bp = Blueprint('upload', __name__)
 # nlp = spacy.load('en_core_web_sm')
-openai.api_key = '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'
+
 
 
 @upload_bp.route('/api/v1/upload', methods=['POST'])
