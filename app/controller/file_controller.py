@@ -31,8 +31,8 @@ AUDIO_FOLDER = 'uploads/audio'
 SERVICE_ACCOUNT_INFO = {
   "type": "service_account",
   "project_id": "infra-mechanic-432911-h6",
-  "private_key_id": "d762cd424e4c9917c1d1e1db282ce47f01b980d2",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDZrYdqkNFc2FVn\nPjII/XN+f+E5UcN0GGSfbUuX1cjJTOPykrHjivH+C+YkdB6FMqtH7XX3XVwxa/2E\n6LZOnU+diq6gDOmi9hcnU+ZCSJwhIxry9iw8a/HfFo6JDJMYW+vggmkFFlgJTjeX\nm0sLPN766kpdU/VwPqU+M2PPJf7foEncxP3iudsInsvb7ksceKgJH9JxIk7HARuA\nx8RM1NfQliEq0nvf7lHI+kgnzUqUEDI4W/SsqfkaSmIbwtY4ssfFihbfnTVxLDHJ\nbumG2EMvjCt4TN0D4J0VCkvHccnlHH120e4OKVdHoiSzIyr6eNLtgVe6UbXDoEcB\nulFJpqt/AgMBAAECggEAEwCD9riHnjxAUE/snD5Ly7osFg3eKw9KEWTAGZQPAAuX\nRoCpyLxDXbL6Nypv057VtuSyzJI4zxOnQOfzqi8vWQhXMB+Qcapb4RIA4r5l6rqe\nyqDUwb2GkrvsW2hemtzDXYjk1A3cR4utbK2gwm1g5bR4I2eF4HOHh0ODLf0aH7k8\nEw1d49xxBdkzgD1MtFFkn3kbcRQjeyBxKMxj9kjdrUulq+E5qI+BqdKg87hiCm6U\nNIQT07FOZZUooWCLsz1l68pVZYzkNWh7uVd/4Fw4WqI2g02UzeWxliy7POJFVFsL\nLxeC5ZSvPrsFofdVPdjKPTL/QwIt8KBCRV0r5kTfIQKBgQD5MtxC1goZeh7YX3XU\nNu6/JinqBW623Hy4xGTrtUyr1eb4itYdUuWWXX7xxQdwuTHHKVEN1hS71OXf5V1p\n3Q97RRpeGxy/3GvZbxMLWipJE9a/OUFCxBDr2kErsbF5hRmaIDxk5rbM/h1E+xIT\nKWHCYyHpElRkPISy59ChPT2M7wKBgQDfnm8cGLVxttoZ/niC/tyEHxGFV3Mh0NXn\nFocOtMJ6ujvBrqrnqqZHG0gFsMwgVyZBCWRKrhShmYmjtE67nYBu8uOQgAZ9FdET\nIvOYu5k6GoUWzOPzlqTNeJzDHfZFEhbdsaiktuGzWMQV9BMY7Wnu2KAdzCAt0/mT\nOSByXefqcQKBgAgNsryeOjlUjwajHyW6mMCotRYREuDqA0XdYv2TIGU1Rn+lzQGp\nmi3f26hom7Ly6T7sgOgXkRf462zu9rPjJwru0slTyvwQXZPrWQw238L41yna6dcE\nix90MEL/PSMWQBuRCyKfqiy50axXCOCBp90mYwQrSXrr0cYOY9myJvkVAoGAeKtB\nH/NBbkSSuvYzx9SJ4I33YXIIQdY0p0fjx47JZ3q5plGADhVrNvHE0rVN4aHFldDg\nmuAHaBC3UmyJE/rxBG3zWNWNKtCsCtyQgPmyvMT0zpHv7FF9Sxdr2GqBq1IQnr8w\n1vmNH7+lyIb2CzyKLoYdGRc+whwiEE0CclS0QjECgYAYK0KNDoEKtzY3MMdfpC82\nuStwzp0kFc51HUeEC8pBpIQBPe9PQe6Zx7VUuptV0isC1u3hEkVy1BPzTViVHVFm\nd2+KVmsg2dwHT7IEpGZoWdlKj4anPfZEFLmb3UjfUVEsv4ADDbv8l8xH9U3cryu2\ngEJSUxmFUY/S0jvymPAJxA==\n-----END PRIVATE KEY-----\n",
+  "private_key_id": "759f94bde33bbda82b1a20b0952d5cf2892fd080",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDI1AOiCijV5IYm\npGS0KDHa9g/GHqYQDztGf5Zvr/0lh26At4IrjdZnoj8Wj/pOvcOd5aBFaxPIf3w9\nbYeL5qDDPVL/Ww/oB4NvM7UPtQImtGMoJxEicknZiqeL6/AiGoUTlSZMXp28k6lk\nBOW3AYwauag0mtSMY3kzzq9CHs66VYGZvUl8lfAEqv/nHWlBj8/PvtKDkOIDw9JO\n2Ak2z2MbZvf9CU87RA2bzq4t4fDsXZtB7P5iZ8qLGexJ4XPANUXl4zIm6y3l3RnP\n8kwqBnKhQO0XORuiN53EJiMhWD37ry81TrQNvtE2V9mrllJB0xmwNLSjzwjdykrL\nFARCUaYDAgMBAAECggEAEMm8ZgLQaBT66+cJLhBAHqw8JFUyj5weWeXXhw2grU71\ne1gbzxVDy5UCDhpKE+QEIsJr0/HADR4vHhl2X8kPPlL1ibgsi7p5D8Y0SBRbEi45\nLcWaRpVkPAW9vNIj2E38OudYdMDiEb4MRnqsU1CTTDah64fX5cZ4/s4z02Ss5mGS\nk08xOsEBRW0VCahl4VKg8dtpg+eSd5wjLr7mkTMngGUnwzJrf7sZ9qVmIv1PlrEe\n+KlSADzsE7Zn8i4JNnDk+EF79VCiq72OMxCnGIj0CGG1Uk3lHMDxg2bmYJvQ9mOP\nOAwUWpFtEGy8cWG6/BpmN0tzPDrTIiP/EXryBN8NMQKBgQDkwKll4rdeJLafIqGH\nCFupMdTMvBNIQgXPziVE5avCCv5OpTGsnHbQvNLqw+4qaM1VRJKgdSrvLVqoowYi\nq3VvpQluodh1OsTvYJKW4ZCSELKm3sFTlutHOIU48YxT6SLqHU/+Un5AUld+Fn9n\nnEQwT700o/KxzjcwWEmShFt+swKBgQDgv9r471j5E7x4MMGHuWDnZPWSBNcvNUvE\n66ezd34b1wT1ri/3MPBwNrLUtV+2uD1evgvPMWTvVg+nD9UPZ9+ptuNVQDcBo91E\njOm2TWNSrrUehkKV2edqjWKLBkUBxwLKbWxiqlLUm01BStSXnl4W1Y9IgFw3zSUA\nieurBBLjcQKBgDJkMqzsHaLSiZxSv6yEbdS+0nbrc3/2c1tMuS8NPSH40/61K1Uv\n/oiLIBdxY/TZs2n2Oiq4xOV9YzxE9WQLy0n13DcP1iQ09w8YghJUzEkw/nn+Fi54\nz4mX7NkXdOdDM1rJbEbFG2TF/toa0KQda3QNDMwc1ajPmZ6/xC1PlOw7AoGAAaAh\nm09P221THaNsouiqVMIcLJQwYj0GcUQrEFc66ESj2osJ+cW213jtzjAJoy6t8vN4\n7mSzEDAVKOYqalQcAAQ8nK88NpzSyt4iCpmAsGZnFPNvo9nRnKmtHshK03p3ALPN\n5uDIfJUq99/srbQNhijBQor7H8QyElDtDW2YHWECgYBetrVfTMB70jVhCbtZ32Pl\nWWhxra1zF7sGM9fuL85qQ2RbK3jBLPwnrZxcz3Y2F4pU/ZxtrDdLrb4noJSjCpP0\n+F4Y9RvwgXFcA21vI65NPsDEbjPAh8Dp6Zswdt1tRxkdMSMK5hI/fdFiaeLT8HSG\nnI/yOrEA279JAA8sE8NF6Q==\n-----END PRIVATE KEY-----\n",
   "client_email": "translation-service-account@infra-mechanic-432911-h6.iam.gserviceaccount.com",
   "client_id": "108658361032202589941",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
@@ -41,6 +41,7 @@ SERVICE_ACCOUNT_INFO = {
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/translation-service-account%40infra-mechanic-432911-h6.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }
+
 
 @file_upload_bp.route('/api/v1/upload', methods=['POST'])
 def upload_ppt():
@@ -65,7 +66,7 @@ def upload_ppt():
         target_language = request.args.get('language', 'Hindi')
         language_code = request.args.get('language_code', '')
         print("Transalting started in google")
-        translate_ppt(filepath, translated_filepath, language_code)
+        translate_ppt1(filepath, translated_filepath, language_code)
         slides_data = extract_text_from_ppt(translated_filepath)
         image_folder = 'uploads/images/'
         thread = threading.Thread(target=create_audio_from_text, args=(slides_data, language_code))
@@ -131,13 +132,13 @@ def generate_video():
         audio_clips.append(audio_clip)
 
         # Write the image to the video
-        frame_count = int((audio_clip.duration + 3) * fps)
+        frame_count = int((audio_clip.duration + 1.5) * fps)
         print(frame_count, "frame_count")
         image = cv2.imread(slide_image_path)  # Read the image into a NumPy array
         for _ in range(frame_count):
             out.write(image)
     out.release()
-    silence = create_silence(3)
+    silence = create_silence(1.5)
     results = []
     for clip in audio_clips:
         result = process_clip(clip, silence)
@@ -200,43 +201,75 @@ def get_access_token(credentials):
     credentials.refresh(auth_request)
     return credentials.token
 
+def get_service_account_credentials():
+    return service_account.Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO)
 
-def translate_ppt(input_ppt_path, output_file_path, target_language_code):
-    scopes = ["https://www.googleapis.com/auth/cloud-translation"]
-    credentials = service_account.Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
-    access_token = get_access_token(credentials)
 
-    url = f"https://translate.googleapis.com/v3beta1/projects/infra-mechanic-432911-h6/locations/us-central1:translateDocument"
-
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json"
-    }
-
+def translate_ppt1(input_ppt_path, output_file_path, target_language_code):
+    credentials = get_service_account_credentials()
+    client = translate.TranslationServiceClient(credentials=credentials)
+    project_id = "infra-mechanic-432911-h6"
+    location = "us-central1"
+    parent = f"projects/{project_id}/locations/{location}"
     with open(input_ppt_path, "rb") as document:
         document_content = document.read()
-    encoded_content = base64.b64encode(document_content).decode('utf-8')
-
-    body = {
-        "targetLanguageCode": target_language_code,
-        "documentInputConfig": {
-            "content": encoded_content,  # Decode to string to include in JSON
-            "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-        }
+    document_input_config = {
+        "content": document_content,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     }
 
-    response = requests.post(url, headers=headers, json=body)
+    response = client.translate_document(
+        request={
+            "parent": parent,
+            "target_language_code": target_language_code,
+            "document_input_config": document_input_config,
+        }
+    )
+    translated_content = response.document_translation.byte_stream_outputs[0]
 
-    if response.status_code == 200:
-        result = response.json()
-        translated_content = base64.b64decode(result['documentTranslation']['byteStreamOutputs'][0])
-        with open(output_file_path, "wb") as output_file:
-            output_file.write(translated_content)
+    with open(output_file_path, "wb") as output_file:
+        output_file.write(translated_content)
+    print(f"Document translated successfully! Saved as '{output_file_path}'.")
+    print(f"Detected Language Code: {response.document_translation.detected_language_code}")
 
-        print(f"Document translated successfully! Saved as '{output_file_path}'.")
-        print(f"Detected Language Code: {result['documentTranslation']['detectedLanguageCode']}")
-    else:
-        print(f"Error: {response.status_code} - {response.text}")
+# TODO Here is the code for translating ppt using rest API.
+
+# def translate_ppt(input_ppt_path, output_file_path, target_language_code):
+#     scopes = ["https://www.googleapis.com/auth/cloud-translation"]
+#     credentials = service_account.Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
+#     access_token = get_access_token(credentials)
+#
+#     url = f"https://translate.googleapis.com/v3beta1/projects/infra-mechanic-432911-h6/locations/us-central1:translateDocument"
+#
+#     headers = {
+#         "Authorization": f"Bearer {access_token}",
+#         "Content-Type": "application/json"
+#     }
+#
+#     with open(input_ppt_path, "rb") as document:
+#         document_content = document.read()
+#     encoded_content = base64.b64encode(document_content).decode('utf-8')
+#
+#     body = {
+#         "targetLanguageCode": target_language_code,
+#         "documentInputConfig": {
+#             "content": encoded_content,  # Decode to string to include in JSON
+#             "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+#         }
+#     }
+#
+#     response = requests.post(url, headers=headers, json=body)
+#
+#     if response.status_code == 200:
+#         result = response.json()
+#         translated_content = base64.b64decode(result['documentTranslation']['byteStreamOutputs'][0])
+#         with open(output_file_path, "wb") as output_file:
+#             output_file.write(translated_content)
+#
+#         print(f"Document translated successfully! Saved as '{output_file_path}'.")
+#         print(f"Detected Language Code: {result['documentTranslation']['detectedLanguageCode']}")
+#     else:
+#         print(f"Error: {response.status_code} - {response.text}")
 
 
 def create_silence(duration):
